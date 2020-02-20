@@ -1,0 +1,52 @@
+CREATE TABLE TPDT_TRN_PD_ORD
+(
+	`Order` varchar(20) NULL,   
+	`Planning plant` varchar(5) NULL,    
+	`Material Number` varchar(20) NULL,    
+	`MRP controller` varchar(5) NULL,    
+	`Order Type` varchar(5) NULL,
+	`Order quantity` decimal(18, 2) NULL,
+	`Unit of measure` varchar(5) NULL,
+	`Basic start date` datetime NULL,
+	`Basic finish date` datetime NULL,
+	`Message Type` varchar(5) NULL,
+	`Material description` varchar(80) NULL,
+	`Production Version` varchar(5) NULL
+) 
+
+
+CREATE TABLE TPDT_TRN_COOIS 
+(
+	`Order` varchar(20),
+	`Planning plant` varchar(5),
+	`Material Number` varchar(18),
+	`Material description` varchar(80),
+	`Batch` varchar(10),
+	`Production Version` varchar(5),
+	`MRP controller` varchar(5),
+	`Order Type` varchar(5),
+	`Order quantity` decimal(18, 2),
+	`Uom` varchar(10),
+	`Basic start date` datetime,
+	`Basic start time` time,
+	`Basic finish date` datetime,
+	`Basic finish time` time,
+	`Deletion flag` varchar(10),
+	`Actual start date` datetime,
+	`Actual start time` time,
+	`Actual finish date` datetime,
+	`Actual finish time` time,
+	`Pd Status` varchar(1)
+)
+
+
+
+
+SELECT `MRP controller`, count(*) FROM `tpdt_trn_pd_ord` GROUP by `MRP controller`
+
+SELECT `Material description`, SUM(`Order quantity`) as QTY FROM `tpdt_trn_pd_ord` GROUP BY `Material description` ORDER BY `Qty` DESC
+
+SELECT `Basic start date`, `MRP controller`, SUM(`Order quantity`) as QTY FROM `tpdt_trn_pd_ord` GROUP BY `Basic start date`, `MRP controller` ORDER BY `Basic start date`, `MRP controller`
+
+
+
